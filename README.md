@@ -1,76 +1,42 @@
 # Sky PC Automated Music Player
 
-Automate music playback in *Sky: Children of the Light* for the **PC** version using a custom Arduino-powered macro keyboard and a Python script. This script reads music sheets in JSON format and simulates keypresses to play music in-game automatically.
+Automate music playback in *Sky: Children of the Light* (PC) using an Arduino Micro and a Python script. The script reads JSON-formatted songs and sends keypresses via Arduino HID to simulate live music input.
 
-> ⚠️ This version is for PC only and does **not** use Chiaki or remote play.
+> ⚠️ For PC only. No remote play or Chiaki needed.
 
 ---
 
-## About
+### Requirements
 
-This project allows automated music playback in *Sky: Children of the Light* (PC). It simulates physical keyboard input via an Arduino Micro.
-
-- Reads music sheets (in `.json` format)
-- Maps song notes to keyboard inputs
-- Sends keypresses using a physical Arduino Micro
-- Enables hands-free music playback while your character plays automatically
-
-This version is inspired by a similar tool for Playstation but is specifically built for PC by sending direct input to your keyboard via Arduino HID.
+- **Arduino Micro** (or any HID-compatible board)
+- **Arduino IDE**
+- **Python 3.8+**
+- USB cable
 
 ---
 
 ## Arduino Setup
 
-You'll need:
-
-- **Arduino Micro** or any board that supports HID (Human Interface Device)
-- Arduino IDE installed
-- USB-C cable
-
-### Flashing the Arduino
-
-1. Open `auto_player.ino` in Arduino IDE.
-2. Set board to **Arduino Micro**  
+1. Open `sketch_aug3a.ino` in Arduino IDE.
+2. Set board:  
    `Tools ▸ Board ▸ “Arduino Micro”`
-3. Set the correct COM port  
-   `Tools ▸ Port ▸ (pick the one labeled Arduino Micro)`
-4. Click **Upload** to flash the sketch to the Arduino.
+3. Set port:  
+   `Tools ▸ Port ▸ (your Arduino Micro)`
+4. Click **Upload** to flash.
 
 ---
 
-## Python Setup
+### Python Setup
 
-1. Clone this repo or download the files.
-
+1. Clone or download this repo.
 2. Install dependencies:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-3. Prepare a song in JSON format.
-
-4. Update the `key_mapping` in the script if your in-game layout differs.
-
----
-
-## Usage
-
-1. Connect your Arduino Micro to the PC via USB.
-2. Launch *Sky: Children of the Light* and enter a musical instrument.
-3. Run the Python script:
-
-    ```bash
-    python script.py songnamehere
-    ```
-
-4. The Arduino will handle keypress playback automatically.
-
----
-
-## Notes
-
-- You can change the layout mapping inside the Python script:
+3. Prepare a song file (`.json` format).
+4. Adjust `key_mapping` in `script.py` if needed:
 
     ```python
     key_mapping = {
@@ -92,15 +58,22 @@ You'll need:
     }
     ```
 
-- Ensure your game is focused and accepts keyboard input.
-- Tempo and timing is calculated based on note durations in the JSON file.
+---
+
+### Usage
+
+1. Plug in the Arduino.
+2. Launch *Sky* and open an instrument.
+3. Run the script:
+
+    ```bash
+    python script.py songname
+    ```
 
 ---
 
-## Other
+### Notes
 
-This script is a fork of a concept originally built for PS4/PS5 users using Chiaki. That version relied on virtual keypresses sent via the Chiaki remote play protocol. This version removes all remote play dependencies by sending real keyboard input using an Arduino Micro.
-
----
-
-Enjoy the music!
+- Make sure the game window is focused and ready to receive input.
+- Song tempo is based on durations in the JSON file.
+- Built from the PS version but sends actual keypresses via Arduino—no virtual input or remote play required.
