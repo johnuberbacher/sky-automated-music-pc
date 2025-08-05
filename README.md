@@ -1,8 +1,6 @@
 # Sky PC Automated Music Player
 
-Automate music playback in *Sky: Children of the Light* (PC) using an Arduino Micro and a Python script. The script reads JSON-formatted songs and sends keypresses via Arduino HID to simulate live music input.
-
-> ⚠️ For PC only. No remote play or Chiaki needed.
+Automate music playback in Sky: Children of the Light (PC) using an Arduino Micro and a Python script with a simple graphical interface. The script reads JSON-formatted songs and sends keypresses via Arduino HID to simulate live music input.
 
 ---
 
@@ -33,6 +31,7 @@ Automate music playback in *Sky: Children of the Light* (PC) using an Arduino Mi
 
     ```bash
     pip install -r requirements.txt
+    pip install pywin32  # For Windows window focusing
     ```
 
 3. Prepare a song file (`.json` format).
@@ -64,16 +63,15 @@ Automate music playback in *Sky: Children of the Light* (PC) using an Arduino Mi
 
 1. Plug in the Arduino.
 2. Launch *Sky* and open an instrument.
-3. Run the script:
-
-    ```bash
-    python script.py songname
-    ```
+3. Run the script
 
 ---
 
 ### Notes
 
-- Make sure the game window is focused and ready to receive input.
-- Song tempo is based on durations in the JSON file.
-- Built from the PS version but sends actual keypresses via Arduino—no virtual input or remote play required.
+- The script tries to focus the game window (by exact title match) before sending input. Make sure your game is running and the window title matches the configured name (default: "Sky: Children of Light").
+- Only one song can play at a time; starting a new song stops the previous one.
+- The GUI handles song selection and playback; no command-line song argument is needed anymore.
+- Song tempo and note timings are based on the JSON files in the songs/ folder.
+- Uses Windows-specific pywin32 for window focusing; Linux/macOS are not supported.
+- The Arduino sends real keypresses; no virtual input or remote play involved.
